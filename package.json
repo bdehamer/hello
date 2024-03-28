@@ -1,0 +1,23 @@
+{
+  "name": "hello",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdehamer/hello.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bdehamer/hello/issues"
+  },
+  "homepage": "https://github.com/bdehamer/hello#readme",
+  "dependencies": {
+    "@actions/attest": "^1.0.0",
+    "@sigstore/cli": "^0.7.0"
+  }
+}
