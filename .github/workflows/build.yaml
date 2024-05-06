@@ -4,6 +4,15 @@ on:
   workflow_dispatch:
 
 jobs:
+  reusable:
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+      attestations: write
+    uses: bdehamer/workflows/.github/workflows/publish.yml@main
+    with:
+      greeting: hello
   build:
     runs-on: ubuntu-latest
     permissions:
