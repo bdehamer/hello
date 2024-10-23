@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93 # v3
         with:
           node-version: 20
-          registry-url: 'https://registry-sandbox.npm.red'
+          registry-url: 'https://registry-staging.npm.red'
           check-latest: true
       - name: Bump package versions
         run: |
@@ -36,4 +36,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --provenance --access public --registry https://registry-sandbox.npm.red
+          npm publish --provenance --access public --registry https://registry-staging.npm.red
