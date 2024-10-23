@@ -1,6 +1,10 @@
 name: publish-with-provenance
 on:
   workflow_dispatch:
+    inputs:
+      npm-latest:
+        type: boolean
+        default: false
 
 jobs:
   publish:
@@ -20,8 +24,13 @@ jobs:
       - name: Bump package versions
         run: |
           sed -i '' "s/1.0.0/1.0.0-${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}/" "package.json"
+      - name: Install latest node
+        if: ${{ inputs.npm-latest }}
+        run: |
+          npm install -g npm/cli#latest
       - name: Install
         run: |
+          npm --version
           npm install
       - name: Publish package
         env:
