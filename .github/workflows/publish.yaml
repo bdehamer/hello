@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93 # v3
         with:
           node-version: 20
-          registry-url: 'https://registry.npmjs.com'
+          registry-url: 'https://registry-sandbox.npm.red'
           check-latest: true
       - name: Bump package versions
         run: |
