@@ -27,4 +27,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --provenance --access public --registry https://registry-staging.npm.red
+          npm publish --provenance --access public --registry https://registry-sandbox.npm.red
