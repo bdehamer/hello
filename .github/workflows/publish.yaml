@@ -24,16 +24,19 @@ jobs:
       - name: Bump package versions
         run: |
           sed -i '' "s/1.0.0/1.0.0-${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}/" "package.json"
-      - name: Install latest node
-        if: ${{ inputs.npm-latest }}
-        run: |
-          npm install -g npm/cli#latest
       - name: Install
         run: |
           npm --version
           npm install
       - name: Publish package
+        if: ${{ ! inputs.npm-latest }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           npm publish --provenance --access public --registry https://registry-staging.npm.red
+      - name: Publish package
+        if: ${{ inputs.npm-latest }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm exec npm@npm/cli#latest -- publish --provenance --access public --registry https://registry-staging.npm.red
