@@ -8,7 +8,7 @@ on:
 
 jobs:
   publish:
-    runs-on: 'self-hosted'
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
@@ -19,24 +19,17 @@ jobs:
         uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93 # v3
         with:
           node-version: 20
-          registry-url: 'https://registry-staging.npm.red'
           check-latest: true
       - name: Bump package versions
         run: |
-          sed -i '' "s/1.0.0/1.0.0-${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}/" "package.json"
+          sed -i "s/1.0.0/1.1.0/" "package.json"
       - name: Install
         run: |
           npm --version
           npm install
+          npm install -g npm@latest
       - name: Publish package
-        if: ${{ ! inputs.npm-latest }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm publish --provenance --access public --registry https://registry-staging.npm.red
-      - name: Publish package
-        if: ${{ inputs.npm-latest }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          npm exec npm@npm/cli#latest -- publish --access public --registry https://registry-staging.npm.red
+          npm publish --provenance --access public 
