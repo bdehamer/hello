@@ -18,7 +18,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93 # v3
         with:
-          node-version: 20
+          node-version: 20.18.1
           registry-url: 'https://registry-sandbox.npm.red'
           check-latest: true
       - name: Bump package versions
@@ -27,7 +27,7 @@ jobs:
       - name: Install
         run: |
           npm --version
-          npm install
+          #npm install
       - name: Publish package
         if: ${{ ! inputs.npm-latest }}
         env:
@@ -39,5 +39,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm install -g npm@latest
-          npm publish --provenance --access public --registry https://registry-sandbox.npm.red
+          npm exec npm@npm/cli#latest -- publish --provenance --access public --registry https://registry-sandbox.npm.red
