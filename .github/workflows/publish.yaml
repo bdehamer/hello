@@ -39,4 +39,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          npm exec npm@npm/cli#latest -- publish --provenance --access public --tag latest --registry https://registry-sandbox.npm.red
+          npm install --no-save npm@latest
+          ./node_modules/.bin/npm --version
+          ./node_modules/.bin/npm publish --provenance --access public --tag latest --registry https://registry-sandbox.npm.red
+          #npm exec npm@npm/cli#latest -- publish --provenance --access public --tag latest --registry https://registry-sandbox.npm.red
